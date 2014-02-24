@@ -1,10 +1,10 @@
 <html><head>
-<title>The Monty Hall problem</title>
+<title>The Monty Hall Problem</title>
 <script language="JavaScript">
 <!--
 window.resizeTo(725,590);
 window.moveTo(Math.floor((screen.width-725)/2),Math.floor((screen.height-590)/2));
-CarPos=0; Goat1Pos=1; Goat2Pos=2;
+CarPos=0; cow1Pos=1; cow2Pos=2;
 Mode=FirstChoice=GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=TheRandom=RunAutoCycles=0;
 Cheating=false;
 
@@ -21,11 +21,11 @@ function ClearCounters(){
 	document.all.ChangeLose.innerText=0;
 	document.all.Line2.innerText="cars";
 	document.all.Line3.innerText="(0%)";
-	document.all.Line4.innerText="goats";
+	document.all.Line4.innerText="cows";
 	document.all.Line5.innerText="(0%)";
 	document.all.Line6.innerText="cars";
 	document.all.Line7.innerText="(0%)";
-	document.all.Line8.innerText="goats";
+	document.all.Line8.innerText="cows";
 	document.all.Line9.innerText="(0%)";
 	return true;
 }
@@ -64,7 +64,7 @@ function Mode1Act(pos){
 	document.all.photoG2.style.visibility='visible';
 	document.all.Line1.innerHTML=(pos==FirstChoice?"You kept your choice":"You changed your choice")+", "+(pos=="C"?"You win the car !":"You lose");
 
-	if(pos==FirstChoice) { // Keep choice
+	if(pos==FirstChoice) { // Keep Choice
 		GuessesKeep++;
 		document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
 		if(pos=="C"){ // Car
@@ -72,16 +72,16 @@ function Mode1Act(pos){
 			document.all.KeepWin.innerText=KeepWin;
 			if(KeepWin==1){ document.all.Line2.innerText="car"; }
 			if(KeepWin==2){ document.all.Line2.innerText="cars"; }
-		} else { // Goat
+		} else { // cow
 			KeepLose++;
 			document.all.KeepLose.innerText=KeepLose;
-			if(KeepLose==1){ document.all.Line4.innerText="goat"; }
-			if(KeepLose==2){ document.all.Line4.innerText="goats"; }
+			if(KeepLose==1){ document.all.Line4.innerText="cow"; }
+			if(KeepLose==2){ document.all.Line4.innerText="cows"; }
 		}
 		document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
 		document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
-	} else { // Change choice
+	} else { // Switch Choice
 		GuessesChange++;
 		document.all.WithChange.innerText=GuessesChange+(GuessesChange==1?" time":" times");
 		if(pos=="C"){ // Car
@@ -89,11 +89,11 @@ function Mode1Act(pos){
 			document.all.ChangeWin.innerText=ChangeWin;
 			if(ChangeWin==1){ document.all.Line6.innerText="car"; }
 			if(ChangeWin==2){ document.all.Line6.innerText="cars"; }
-		} else { // Goat
+		} else { // cow
 			ChangeLose++;
 			document.all.ChangeLose.innerText=ChangeLose;
-			if(ChangeLose==1){ document.all.Line8.innerText="goat"; }
-			if(ChangeLose==2){ document.all.Line8.innerText="goats"; }
+			if(ChangeLose==1){ document.all.Line8.innerText="cow"; }
+			if(ChangeLose==2){ document.all.Line8.innerText="cows"; }
 		}
 		document.all.Line7.innerText="(" + Math.floor(100*ChangeWin/GuessesChange)+"%)";
 		document.all.Line9.innerText="(" + (100-Math.floor(100*ChangeWin/GuessesChange))+"%)";
@@ -192,11 +192,11 @@ function RunAuto(HowToChoose){
 	FirstChoice=RandomNumber(3);
 	FirstChoice=(FirstChoice>0?"G"+FirstChoice:"C");
 	Mode=0;
-	RevealedGoat=Mclick(FirstChoice);
+	Revealedcow=Mclick(FirstChoice);
 	Mode=9;
-	SecondChoice=(HowToChoose==1?(FirstChoice=="C"?"G"+(2-eval(RevealedGoat.charAt(1))):"C"):FirstChoice);
+	SecondChoice=(HowToChoose==1?(FirstChoice=="C"?"G"+(2-eval(Revealedcow.charAt(1))):"C"):FirstChoice);
 	Mode=1;
-	RevealedGoat=Mclick(SecondChoice);
+	Revealedcow=Mclick(SecondChoice);
 	Mode=9;
 	RunAutoCycles--;
 	if(RunAutoCycles>0){
@@ -227,30 +227,30 @@ function RunButton(CyclesToRun,HowToChoose){
 function ScramblePositions(){
 	CarPos=RandomNumber(3);
 	if(RandomNumber(2)==0){
-		Goat1Pos=CarPos+1; Goat2Pos=CarPos+2;
+		cow1Pos=CarPos+1; cow2Pos=CarPos+2;
 	} else {
-		Goat1Pos=CarPos+2; Goat2Pos=CarPos+1;
+		cow1Pos=CarPos+2; cow2Pos=CarPos+1;
 	}
-	if(Goat1Pos>2){Goat1Pos-=3;}
-	if(Goat2Pos>2){Goat2Pos-=3;}
+	if(cow1Pos>2){cow1Pos-=3;}
+	if(cow2Pos>2){cow2Pos-=3;}
 	document.all.qmC.style.pixelLeft=25+225*CarPos;
 	document.all.photoC.style.pixelLeft=25+225*CarPos;
-	document.all.qmG1.style.pixelLeft=25+225*Goat1Pos;
-	document.all.photoG1.style.pixelLeft=25+225*Goat1Pos;
-	document.all.qmG2.style.pixelLeft=25+225*Goat2Pos;
-	document.all.photoG2.style.pixelLeft=25+225*Goat2Pos;
+	document.all.qmG1.style.pixelLeft=25+225*cow1Pos;
+	document.all.photoG1.style.pixelLeft=25+225*cow1Pos;
+	document.all.qmG2.style.pixelLeft=25+225*cow2Pos;
+	document.all.photoG2.style.pixelLeft=25+225*cow2Pos;
 	document.all.photoC.style.zIndex=(CarPos==1?4:3);
-	document.all.photoG1.style.zIndex=(Goat1Pos==1?4:3);
-	document.all.photoG2.style.zIndex=(Goat2Pos==1?4:3);
+	document.all.photoG1.style.zIndex=(cow1Pos==1?4:3);
+	document.all.photoG2.style.zIndex=(cow2Pos==1?4:3);
 	return true;
 }
 
 // --- --- --- --- --- --- --- --- --- ---
 
 function SelectCheating(){
-	document.all.qmC.innerText=Cheating?"C":"?";
-	document.all.qmG1.innerText=Cheating?"G":"?";
-	document.all.qmG2.innerText=Cheating?"G":"?";
+	document.all.qmC.innerText=Cheating?"CA":"?";
+	document.all.qmG1.innerText=Cheating?"CO":"?";
+	document.all.qmG2.innerText=Cheating?"CO":"?";
 	if(Mode>0){
 		document.all["qm"+FirstChoice].innerText="!";
 		if(Mode==1){ WriteMode1Text(); }
@@ -261,7 +261,7 @@ function SelectCheating(){
 // --- --- --- --- --- --- --- --- --- ---
 
 function WriteMode1Text(){
-	document.all.Line1.innerHTML="Click '!' to keep your first choice or '" + (Cheating?(FirstChoice=="C"?"G":"C"):"?") + "' to change it";
+	document.all.Line1.innerHTML="Click '!' to keep your first choice or '" + (Cheating?(FirstChoice=="C"?"G":"C"):"?") + "' to switch it";
 	return true;
 }
 
@@ -270,60 +270,95 @@ function WriteMode1Text(){
 </script>
 <style>
 <!--
-body, table, select, input {font-family:Arial, Helvetica, sans-serif; color: #666666;}
+body, table, select, input {font-family:Arial, Helvetica, sans-serif; color: #000000;}
+/*body, table, select, input {font-family:Arial, Helvetica, sans-serif; color: #;}*/
 -->
 </style>
 </head>
 
-<body bgcolor="#dccbae" onLoad="PrepareNewRound(); document.all.div8.style.visibility='visible'; document.all.div10.style.visibility='visible'; document.all.div9.style.visibility='visible'; return true;">
+<body bgcolor="#f9f3e3" onLoad="PrepareNewRound(); document.all.div8.style.visibility='visible'; document.all.div10.style.visibility='visible'; document.all.div9.style.visibility='visible'; document.all.div11.style.visibility='visible'; return true;">
 <noscript><h1>Sorry, this program require Javascript, it will not work for you</h1></noscript>
 
 <div id="qmC" style="position:absolute; left:25px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('C'); return true;">?</div>
 <div id="qmG1" style="position:absolute; left:250px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('G1'); return true;">?</div>
 <div id="qmG2" style="position:absolute; left:475px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('G2'); return true;">?</div>
 
+
 <div id="photoC" style="position:absolute; left:25px; top:25px; width:200px; height:200px; visibility: hidden;" onMouseOut="if(Mode==2){Mode2Act();} return true;" onClick="if(Mode==2){Mode2Act();} return true;"><img src="car.jpg" width=200 height=200 border=0></div>
-<div id="photoG1" style="position:absolute; left:250px; top:25px; width:200px; height:200px; visibility: hidden;" onMouseOut="if(Mode==2){Mode2Act();} return true;" onClick="if(Mode==2){Mode2Act();} return true;"><img src="goat1.jpg" width=200 height=200 border=0></div>
-<div id="photoG2" style="position:absolute; left:475px; top:25px; width:200px; height:200px; visibility: hidden;" onMouseOut="if(Mode==2){Mode2Act();} return true;" onClick="if(Mode==2){Mode2Act();} return true;"><img src="goat2.jpg" width=200 height=200 border=0></div>
+<div id="photoG1" style="position:absolute; left:250px; top:25px; width:200px; height:200px; visibility: hidden;" onMouseOut="if(Mode==2){Mode2Act();} return true;" onClick="if(Mode==2){Mode2Act();} return true;"><img src="cow1.jpg" width=200 height=200 border=0></div>
+<div id="photoG2" style="position:absolute; left:475px; top:25px; width:200px; height:200px; visibility: hidden;" onMouseOut="if(Mode==2){Mode2Act();} return true;" onClick="if(Mode==2){Mode2Act();} return true;"><img src="cow2.jpg" width=200 height=200 border=0></div>
 
-<div id="Line1" style="position:absolute; left:25px; top:250px; width:650px; height:30px; visibility: visible; font-weight: bold; color: #000000; font-size: 18pt; text-align:center;">Loading, Please wait...</div>
+<div id="Line1" style="position:absolute; left:25px; top:250px; width:650px; height:30px; visibility: visible; font-weight: bold; color: #000000; font-size: 18pt; text-align:center;">Page currently loading, Please wait...</div>
 
-<div id="div8" style="position:absolute; left:25px; top:310px; width:300px; height:65px; visibility: hidden; font-weight: bold; color: #666666; font-size: 12pt;  text-align:center; z-index:2;">
-Keep choice: <span id="WithKeep">0 times</span>
+<div id="div8" style="position:absolute; left:25px; top:310px; width:300px; height:65px; visibility: hidden; font-weight: bold; color: #000000; font-size: 14pt;  text-align:center; z-index:2;">
+Keep Choice: <span id="WithKeep">0 times</span>
 <table><tr><td>Wins:</td><td id="KeepWin" align=right>0</td><td id="Line2">cars</td><td id="Line3">(0%)</td></tr>
-<tr><td>Losses:</td><td id="KeepLose" align=right>0</td><td id="Line4">goats</td><td id="Line5">(0%)</td></tr></table>
+<tr><td>Losses:</td><td id="KeepLose" align=right>0</td><td id="Line4">cows</td><td id="Line5">(0%)</td></tr></table>
 </div>
 
-<div id="div9" style="position:absolute; left:375px; top:310px; width:300px; height:65px; visibility: hidden; font-weight: bold; color: #666666; font-size: 12pt;  text-align:center; z-index:2;">
-Change choice: <span id="WithChange">0 times</span>
+<div id="div9" style="position:absolute; left:375px; top:310px; width:300px; height:65px; visibility: hidden; font-weight: bold; color: #000000; font-size: 14pt;  text-align:center; z-index:2;">
+Switch Choice: <span id="WithChange">0 times</span>
 <table><tr><td>Wins:</td><td id="ChangeWin" align=right>0</td><td id="Line6">cars</td><td id="Line7">(0%)</td></tr>
-<tr><td>Losses:</td><td id="ChangeLose" align=right>0</td><td id="Line8">goats</td><td id="Line9">(0%)</td></tr></table>
+<tr><td>Losses:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr></table>
 </div>
 
-<div id="div10" style="position:absolute; left:25px; top:385px; width:650px; height:30px; visibility: hidden; color: #666666; font-size: 8pt; text-align:center; z-index:2;">
-<form name="AutoRun"><table border=0 style="color: #666666; font-size: 10pt;"><tr><td>Run </td>
-<td><select name="Cycles" size=1><option value=10>10<option value=100 selected>100<option value=1000>1000</select></td>
-<td> times and </td>
-<td><select name="Decision"><option value=0>keep<option value=1>change</select></td>
-<td id="Line10">the choice:</td>
-<td width=50><input type=button value="Start" name="Start" title="Start/stop automatic run" onClick="RunButton(this.form.Cycles.value,this.form.Decision.value); return true;"></td>
-<td style="font-weight: bold;"> &nbsp; &nbsp; &nbsp; </td>
-<td><input type="checkbox" name="Cheat" onClick="Cheating=this.checked; SelectCheating(); return true;" title="Cheating on/off">Cheat</td><td style="color: font-weight: bold;"> &nbsp; &nbsp; &nbsp; </td><td><input type=button value="Clear result" title="Clear the counters above" onClick="return ClearCounters();"> &nbsp; &nbsp; &nbsp; </td><td><input type=button value="Help" onClick="document.all.div10.style.visibility='hidden'; document.all.helptext.style.visibility='visible'; return true;"></td></tr></table></form></div>
+<!-- THE NEWLY BUILT COMPARISON BAR -->
+<div id="div11" style="position:absolute; left:25px; top:375px; width:650px; height:150px; visibility: hidden; font-weight: bold; color: #000000; font-size: 14pt;  text-align:center; z-index:2;">
+Game Staticstics Comparison: 
+<table><tr><td>&nbsp; &nbsp; &nbsp; &nbsp;</td><td>Games played</td><td>Switches offered</td><td>Switch & Won</td><td>Switch & Lost</td><td>No Switch & Won</td><td>No Switched & Lost</td></tr>
+<tr><td>Host1:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
+<tr><td>Host2:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
+<tr><td>Host3:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr></table>
+</div>
 
-<div id="div11" style="position:absolute; left:25px; top:308px; width:650px; height:110px; visibility: visible; background-color:#ffffff; z-index:1;"><img src="simbg_top.gif" width=650 height=18 border=0 alt="">
+
+<div id="div10" style="position:absolute; left:25px; top:520px; width:700px; height:30px; visibility: hidden; color: #666666; font-size: 14pt; text-align:center; z-index:2;">
+
+<form name="AutoRun"><table border=0 style="color: #666666; font-size: 10pt;"><tr><td>Run </td>
+
+<td><select name="Cycles" size=1><option value=10>10<option value=100 selected>100<option value=1000>1000</select></td>
+
+<td> &nbsp; times and &nbsp; </td>
+
+<td><select name="Decision"><option value=0>keep<option value=1>change</select></td>
+
+<td id="Line10"> &nbsp; the choice: &nbsp; </td>
+
+<td width=50><input type=button value="Start" name="Start" title="Start/stop automatic run" onClick="RunButton(this.form.Cycles.value,this.form.Decision.value); return true;"></td>
+
+<td style="font-weight: bold;"> &nbsp; &nbsp; &nbsp; </td>
+
+<td><input type="checkbox" name="Cheat" onClick="Cheating=this.checked; SelectCheating(); return true;" title="Cheating on/off">Cheat</td>
+
+<td style="color: font-weight: bold;"> &nbsp; &nbsp; &nbsp; </td>
+
+<td><input type=button value="Clear result" title="Clear the counters above" onClick="return ClearCounters();"> &nbsp; &nbsp; &nbsp; </td>
+
+<td><input type=button value="Help" onClick="document.all.div10.style.visibility='hidden'; document.all.helptext.style.visibility='visible'; return true;"></td></tr>
+
+</table></form></div>
+
+
+
+<div id="div12" style="position:absolute; left:25px; top:308px; width:650px; height:250px; visibility: visible; background-color:#ffffff; z-index:1;"><img src="simbg_top.gif" width=650 height=18 border=0 alt="">
 </div>
 
 <div id="helptext" style="position:absolute; left:25px; top:25px; width:650px; height:390px; visibility: hidden; background-color:#ffffff; z-index:3;"><img src="simbg_top.gif" width=650 height=18 border=0 alt="">
-<table width=555 align=center style="font-size: 75%;"><tr><td><br>
-This program is a simulator for the Monty Hall Problem, as described on the <a href=http://www.grand-illusions.com/articles/monty_hall/ target="_blank" style="text-decoration: none; color: #666666; font-weight: bold;}">Grand-illusion website</a>.<br><br>
-The simulator randomly positions the car and the goats in the three black boxes. To start a run, click on one of the question marks. The simulator will then open a box with a goat in it. If you have chosen the car, the simulator will randomly select one of the two boxes with a goat. Click again when you have decided if you want to keep or change your first choice.<br><br>
-When you have done your second choice the simulator will reveal the content of all boxes and update the statistics to show the results for changing and keeping respectively. A new run will be prepared when you move the cursor out from the photo or if you click again.<br><br>
+
+
+<table width=555 align=center style="font-size: 100%;"><tr><td><br>
+
+This is a Monty Hall Problem Simulator. Click on one of the 3 doors. If not all doors open, you are being offered a switch; click again on the same door or switch to the other closed door. After all door are opened, the simulator will automatically run a next round. If you want to clear the result, click clear button. Each of the 3 hosts has a different strategy for offering switch<br><br>
+
 You can let the computer run 10, 100 or 1000 runs after each other. Select the number of runs and if choice shall be kept or changed each time and start with the Start button. The simulator will randomly select a box and keep/change the choice after your wish. You can stop the run with the stop-button. <br><br>
-By checking Cheat the boxes will be marked with C and G to show where the Car and the Goats are. <br><br>
-The clear button will reset the statistics to zero.<br><br>
+
+By checking Cheat the boxes will be marked with CA and CO to show where the car and the cows are. <br><br>
+
 </td></tr></table>
+
 <center>
 <form name="CloseHelp"><input type=button value=" Ok " onClick="			document.all.helptext.style.visibility='hidden'; document.all.div10.style.visibility='visible';return true;"></form></center>
 </div>
 
-</body></html>
+</body>
+</html>
