@@ -6,6 +6,7 @@ window.resizeTo(725,590);
 window.moveTo(Math.floor((screen.width-725)/2),Math.floor((screen.height-590)/2));
 CarPos=0; cow1Pos=1; cow2Pos=2;
 Mode=FirstChoice=GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=TheRandom=RunAutoCycles=0;
+	// Need to initialized other variable
 Cheating=false;
 
 
@@ -13,6 +14,7 @@ Cheating=false;
 
 function ClearCounters(){
 	GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=0;
+	// need to add clear method for another vectors as well
 	document.all.WithKeep.innerText="0 times";
 	document.all.KeepWin.innerText=0;
 	document.all.KeepLose.innerText=0;
@@ -67,6 +69,7 @@ function Mode1Act(pos){
 	if(pos==FirstChoice) { // Keep Choice
 		GuessesKeep++;
 		document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
+		document.all.WithKeep1.innerText=GuessesKeep;
 		if(pos=="C"){ // Car
 			KeepWin++;
 			document.all.KeepWin.innerText=KeepWin;
@@ -78,6 +81,7 @@ function Mode1Act(pos){
 			if(KeepLose==1){ document.all.Line4.innerText="cow"; }
 			if(KeepLose==2){ document.all.Line4.innerText="cows"; }
 		}
+		document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
 		document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
 		document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
@@ -305,16 +309,24 @@ Switch Choice: <span id="WithChange">0 times</span>
 <!-- THE NEWLY BUILT COMPARISON BAR -->
 <div id="div11" style="position:absolute; left:25px; top:375px; width:650px; height:150px; visibility: hidden; font-weight: bold; color: #000000; font-size: 14pt;  text-align:center; z-index:2;">
 Game Staticstics Comparison: 
-<table><tr><td>&nbsp; &nbsp; &nbsp; &nbsp;</td><td>Games played</td><td>Switches offered</td><td>Switch & Won</td><td>Switch & Lost</td><td>No Switch & Won</td><td>No Switched & Lost</td></tr>
-<tr><td>Host1:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
-<tr><td>Host2:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
-<tr><td>Host3:</td><td id="ChangeLose" align=right>0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr></table>
+<table><tr><td>&nbsp; &nbsp; &nbsp;</td><td>Games played</td><td>Switched</td><td>Switch Won</td><td>Switch Lost</td><td>No-Switch</td><td>No Switch Won</td><td>No Switched Lost</td></tr>
+<tr><td>Host1:</td><td id="Total1" >0<td id="WithKeep1">0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
+<tr><td>Host2:</td><td id="Total2" >0<td id="WithKeep2" >0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr>
+<tr><td>Host3:</td><td id="Total3" >0<td id="WithKeep3" >0</td><td id="Line8">cows</td><td id="Line9">(0%)</td></tr></table>
 </div>
 
 
 <div id="div10" style="position:absolute; left:25px; top:520px; width:700px; height:30px; visibility: hidden; color: #666666; font-size: 14pt; text-align:center; z-index:2;">
+<form name="HostSelect"><table border=0 style="color: #003399; font-size: 14pt; font-weight: bold">
+	<tr>
+		<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The host is &nbsp;  </td><td><select name="Hosts" size=1><option value=11 selected>Host 1<option value=22>Host 2<option value=33>Host 3</select></td>
+		<td>&nbsp; &nbsp;</td>
+		<td width=80><input type=button value="Apply" name="Apply" title="Apply the new host you selected" onClick="RunButton(this.form.Cycles.value,this.form.Decision.value); return true;"></td>
+	</tr>
+</form>
 
-<form name="AutoRun"><table border=0 style="color: #666666; font-size: 10pt;"><tr><td>Run </td>
+<form name="AutoRun"><table border=0 style="color: #666666; font-size: 10pt;">
+<tr><td>Run </td>
 
 <td><select name="Cycles" size=1><option value=10>10<option value=100 selected>100<option value=1000>1000</select></td>
 
