@@ -16,14 +16,14 @@ Cheating=false;
 
 // ====================================================================================
 function clearTempData(){
+	document.all["Total"+previousHost.toString()].innerText=tempTotal;	
+	document.all["WithKeep"+previousHost.toString()].innerText=tempWithSwitch;
+	document.all["NSW"+previousHost.toString()].innerText=tempNSW;
+	document.all["NSL"+previousHost.toString()].innerText=tempNSL;
+	document.all["WithSwitch"+previousHost.toString()].innerText=tempWithSwitch;
+	document.all["SW"+previousHost.toString()].innerText=tempSW;	
+	document.all["SL"+previousHost.toString()].innerText=tempSL;		
 	tempTotal = tempWithKeep = tempNSW = tempNSL = tempWithSwitch = tempSW = tempSL = 0;
-	document.all["Total"+previousHost.toString()].innerText=0;	
-	document.all["WithKeep"+previousHost.toString()].innerText=0;
-	document.all["NSW"+previousHost.toString()].innerText=0;
-	document.all["NSL"+previousHost.toString()].innerText=0;
-	document.all["WithSwitch"+previousHost.toString()].innerText=0;
-	document.all["SW"+previousHost.toString()].innerText=0;	
-	document.all["SL"+previousHost.toString()].innerText=0;		
 	return true
 }
 
@@ -104,15 +104,15 @@ function behaveHost2(pos){
 				document.all["WithKeep"+host.toString()].innerText=tempWithKeep;
 
 				KeepLose++;
-				tempWithSwitch++;
+				tempNSL++;
 				document.all.KeepLose.innerText=KeepLose;
 				document.all["NSL"+host.toString()].innerText=tempNSL;
 
 				document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
 				document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
-				Total++;
-				tempTotal++;
+				Total = GuessesKeep + GuessesChange;
+				tempTotal = tempWithKeep + tempWithSwitch;
 				document.all["Total"+host.toString()].innerText= tempTotal;	
 				Mode = 2;
 			}
