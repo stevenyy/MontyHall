@@ -300,31 +300,6 @@ function RunButton(CyclesToRun,HowToChoose){
 	return true;
 }
 
-// // --- --- --- --- --- --- --- --- --- ---
-
-// function ScramblePositions(){
-// 	CarPos=RandomNumber(3); // get random number, the one for car here
-// 	// alert("in self test, the RandomNumber(3) returns " + CarPos)
-// 	if(RandomNumber(2)==0){
-// 		cow1Pos=CarPos+1; cow2Pos=CarPos+2;
-// 	} else {
-// 		cow1Pos=CarPos+2; cow2Pos=CarPos+1;
-// 	}
-// 	if(cow1Pos>2){cow1Pos-=3;}
-// 	if(cow2Pos>2){cow2Pos-=3;}
-// 	document.all.qmC.style.pixelLeft=25+225*CarPos;
-// 	document.all.photoC.style.pixelLeft=25+225*CarPos;
-// 	document.all.qmG1.style.pixelLeft=25+225*cow1Pos;
-// 	document.all.photoG1.style.pixelLeft=25+225*cow1Pos;
-// 	document.all.qmG2.style.pixelLeft=25+225*cow2Pos;
-// 	document.all.photoG2.style.pixelLeft=25+225*cow2Pos;
-// 	document.all.photoC.style.zIndex=(CarPos==1?4:3);
-// 	document.all.photoG1.style.zIndex=(cow1Pos==1?4:3);
-// 	document.all.photoG2.style.zIndex=(cow2Pos==1?4:3);
-// 	return true;
-// }
-
-
 // --- --- --- --- --- --- --- --- --- ---
 
 function ScramblePositions(){
@@ -360,62 +335,6 @@ function Mode2Act(){ // Perform moving
 	}
 	return true;
 }
-
-
-
-
-
-
-// --- --- --- --- --- --- --- --- --- ---
-
-// function Mode2Act(){ // Perform moving
-// 	Mode=9;
-// 	if(document.all.photoC.style.visibility=="visible"){
-// 		Cpos=document.all.photoC.style.pixelLeft;
-// 		G1pos=document.all.photoG1.style.pixelLeft;
-// 		G2pos=document.all.photoG2.style.pixelLeft;
-// 		if(Cpos<250){ document.all.photoC.style.pixelLeft=Cpos+5; }
-// 		if(Cpos>250){ document.all.photoC.style.pixelLeft=Cpos-5; }
-// 		if(G1pos<250){ document.all.photoG1.style.pixelLeft=G1pos+5; }
-// 		if(G1pos>250){ document.all.photoG1.style.pixelLeft=G1pos-5; }
-// 		if(G2pos<250){ document.all.photoG2.style.pixelLeft=G2pos+5; }
-// 		if(G2pos>250){ document.all.photoG2.style.pixelLeft=G2pos-5; }
-// 		if(G1pos==G2pos){ // Has reached mid pos
-// 			document.all.qmC.style.pixelLeft=250;
-// 			document.all.qmG1.style.pixelLeft=250;
-// 			document.all.qmG2.style.pixelLeft=250;
-// 			document.all.qmC.innerText="?";
-// 			document.all.qmG1.innerText="?";
-// 			document.all.qmG2.innerText="?";
-// 			document.all.qmC.style.visibility='visible';
-// 			document.all.qmG1.style.visibility='visible';
-// 			document.all.qmG2.style.visibility='visible';
-// 			document.all.photoC.style.visibility='hidden';
-// 			document.all.photoG1.style.visibility='hidden';
-// 			document.all.photoG2.style.visibility='hidden';
-// 			document.all.qmC.style.color='#000000';
-// 			document.all.qmG1.style.color='#000000';
-// 			document.all.qmG2.style.color='#000000';
-// 			document.all.Line1.innerText="";
-// 			setTimeout('Mode2Act();', 222);
-// 		} else {
-// 			setTimeout('Mode2Act();', 1);
-// 		}
-// 	} else {
-// 		G1pos=document.all.qmG1.style.pixelLeft-5;
-// 		document.all.qmG1.style.pixelLeft=G1pos;
-// 		document.all.qmG2.style.pixelLeft=document.all.qmG2.style.pixelLeft+5;
-// 		if(G1pos>25){
-// 			setTimeout('Mode2Act();', 1);
-// 		} else {
-// 			document.all.qmC.style.color='#ffffff';
-// 			document.all.qmG1.style.color='#ffffff';
-// 			document.all.qmG2.style.color='#ffffff';
-// 			setTimeout('PrepareNewRound();', 2);
-// 		}
-// 	}
-// 	return true;
-// }
 
 
 // --- --- --- --- --- --- --- --- --- ---
