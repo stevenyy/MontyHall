@@ -7,18 +7,29 @@ winWidth = 725;
 winHeight = 600;
 window.resizeTo(winWidth,winHeight);
 window.moveTo(Math.floor((screen.width-winWidth)/2),Math.floor((screen.height-winHeight)/2));
-CarPos=0; cow1Pos=1; cow2Pos=2; host = 1;
+CarPos=0; cow1Pos=1; cow2Pos=2; host = previousHost = 1;
 Mode=FirstChoice=GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=TheRandom=RunAutoCycles=0;
 Total1 = Total2 = Total3 = WithKeep1 = WithKeep2 = WithKeep3 = NSW1 = NSW2 = NSW3 = NSL1 = NSL2 = NSL3 = WithSwitch1 = WithSwitch2 = WithSwitch3 = SW1 = SW2 = SW3 = SL1 = SL2 = SL3 = 0;
+tempTotal = tempWithKeep = tempNSW = tempNSL = tempWithSwitch = tempSW = tempSL = 0;
 Cheating=false;
 
 
 // ====================================================================================
+function clearTempData(){
+	tempTotal = tempWithKeep = tempNSW = tempNSL = tempWithSwitch = tempSW = tempSL = 0;
+	document.all["Total"+previousHost.toString()].innerText=0;	
+	document.all["WithKeep"+previousHost.toString()].innerText=0;
+	document.all["NSW"+previousHost.toString()].innerText=0;
+	document.all["NSL"+previousHost.toString()].innerText=0;
+	document.all["WithSwitch"+previousHost.toString()].innerText=0;
+	document.all["SW"+previousHost.toString()].innerText=0;	
+	document.all["SL"+previousHost.toString()].innerText=0;		
+	return true
+}
 
 function ClearCounters(){
 	GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=0;
-	// need to add clear method for another vectors as well
-	document.all.WithKeep.innerText="0 times";
+	document.all.WithKeep.innerText="0 times"; 
 	document.all.KeepWin.innerText=0;
 	document.all.KeepLose.innerText=0;
 	document.all.WithChange.innerText="0 times";
@@ -44,7 +55,9 @@ function Mclick(pos){
 }
 
 function ChangeHost(hostNumber){
+	previousHost = host;
 	host = hostNumber;
+	alert("You are changing host to " + host);
 	return host;
 }
 
@@ -86,18 +99,21 @@ function behaveHost2(pos){
 				document.all.Line1.innerHTML=("You lose");
 
 				GuessesKeep++;
+				tempWithKeep++;
 				document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
-				document.all.WithKeep2.innerText=GuessesKeep;
+				document.all["WithKeep"+host.toString()].innerText=tempWithKeep;
 
 				KeepLose++;
+				tempWithSwitch++;
 				document.all.KeepLose.innerText=KeepLose;
-				document.all.NSL2.innerText=KeepLose;
+				document.all["NSL"+host.toString()].innerText=tempNSL;
 
 				document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
-				document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";	
+				document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
-
-
+				Total++;
+				tempTotal++;
+				document.all["Total"+host.toString()].innerText= tempTotal;	
 				Mode = 2;
 			}
 	return PosToShow;
@@ -112,65 +128,19 @@ function Mode0Act(pos){
 	
 	if (host == 1){
 		behaveHost1(posi);
-		// PosToShow=((pos=="G1" || (pos=="C" && RandomNumber(2)==0))?"G2":"G1");
-		// // alert("Here the PosToShow is " + PosToShow)
-		// document.all["qm"+PosToShow].style.visibility='hidden';
-		// document.all["photo"+PosToShow].style.visibility='visible';
-		// FirstChoice=pos;
-		// WriteMode1Text();
-		// Mode=1;
 	}
 
 	if (host == 2){
 		behaveHost2(posi);
-		// if (pos=="C"){ // user clicks the car at the first point
-		// 	if (RandomNumber(2)==0){
-		// 		PosToShow = "G2"
-		// 	}
-		// 	else {
-		// 		PosToShow = "G1"
-		// 		// alert("Here the PosToShow is " + PosToShow)
-		// 		document.all["qm"+PosToShow].style.visibility='hidden';
-		// 		document.all["photo"+PosToShow].style.visibility='visible';
-		// 		FirstChoice=pos;
-		// 		WriteMode1Text();
-		// 		Mode = 1;			
-		// 	}
-		// }
-		// else{ // user clicks cow at the first and host 2 shows the door, end of game
-		// 	// Model1Act(pos);
-		// 	document.all.qmC.style.visibility='hidden';
-		// 	document.all.qmG1.style.visibility='hidden';
-		// 	document.all.qmG2.style.visibility='hidden';
-		// 	document.all.photoC.style.visibility='visible';
-		// 	document.all.photoG1.style.visibility='visible';
-		// 	document.all.photoG2.style.visibility='visible';
-		// 	document.all.Line1.innerHTML=("You lose");
-
-		// 	GuessesKeep++;
-		// 	document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
-		// 	document.all.WithKeep2.innerText=GuessesKeep;
-
-		// 	KeepLose++;
-		// 	document.all.KeepLose.innerText=KeepLose;
-		// 	document.all.NSL2.innerText=KeepLose;
-
-		// 	document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
-		// 	document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";	
-			
-		// 	document.all["Total"+host.toString()].innerText= GuessesKeep + GuessesChange;
-		// 	Mode = 2;
-		// }
 	}
 	if (host == 3){
 		// if (RandomNumber(2)==0){
-		if (Math.floor((Math.random()*10)+1)>5){
+		if (Math.floor((Math.random()*10)+1)>=5){
 			behaveHost1(posi);
 		}
 		else{
 			behaveHost2(posi);
 		}
-		// (RandomNumber(2)==0)? behaveHost1(pos) : behaveHost2(pos);
 	}
 
 	return PosToShow;
@@ -190,18 +160,21 @@ function Mode1Act(pos){
 
 	if(pos==FirstChoice) { // Keep Choice
 		GuessesKeep++;
+		tempWithKeep++;
 		document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
-		document.all["WithKeep"+host.toString()].innerText=GuessesKeep;
+		document.all["WithKeep"+host.toString()].innerText=tempWithKeep;
 		if(pos=="C"){ // Car Not switched and Win Case
 			KeepWin++;
+			tempNSW++;
 			document.all.KeepWin.innerText=KeepWin;
-			document.all["NSW"+host.toString()].innerText=KeepWin;
+			document.all["NSW"+host.toString()].innerText=tempNSW;
 			if(KeepWin==1){ document.all.Line2.innerText="car"; }
 			if(KeepWin==2){ document.all.Line2.innerText="cars"; }
 		} else { // cow: Not switched and Lose case
 			KeepLose++;
+			tempNSL++;
 			document.all.KeepLose.innerText=KeepLose;
-			document.all["NSL"+host.toString()].innerText=KeepLose;
+			document.all["NSL"+host.toString()].innerText=tempNSL;
 			if(KeepLose==1){ document.all.Line4.innerText="cow"; }
 			if(KeepLose==2){ document.all.Line4.innerText="cows"; }
 		}
@@ -210,25 +183,29 @@ function Mode1Act(pos){
 
 	} else { // Switch Choice
 		GuessesChange++;
+		tempWithSwitch++;
 		document.all.WithChange.innerText=GuessesChange+(GuessesChange==1?" time":" times");
-		document.all["WithSwitch"+host.toString()].innerText=GuessesChange;
+		document.all["WithSwitch"+host.toString()].innerText=tempWithSwitch;
 		if(pos=="C"){ // Car
 			ChangeWin++;
+			tempSW++;
 			document.all.ChangeWin.innerText=ChangeWin;
-			document.all["SW"+host.toString()].innerText=ChangeWin;
+			document.all["SW"+host.toString()].innerText=tempSW;
 			if(ChangeWin==1){ document.all.Line6.innerText="car"; }
 			if(ChangeWin==2){ document.all.Line6.innerText="cars"; }
 		} else { // cow
 			ChangeLose++;
+			tempSL++;
 			document.all.ChangeLose.innerText=ChangeLose;
-			document.all["SL"+host.toString()].innerText=ChangeLose;
+			document.all["SL"+host.toString()].innerText=tempSL;
 			if(ChangeLose==1){ document.all.Line8.innerText="cow"; }
 			if(ChangeLose==2){ document.all.Line8.innerText="cows"; }
 		}
 		document.all.Line7.innerText="(" + Math.floor(100*ChangeWin/GuessesChange)+"%)";
 		document.all.Line9.innerText="(" + (100-Math.floor(100*ChangeWin/GuessesChange))+"%)";
 	}
-	document.all["Total"+host.toString()].innerText= GuessesKeep + GuessesChange;
+	tempTotal = tempWithKeep + tempWithSwitch;
+	document.all["Total"+host.toString()].innerText= tempTotal;
 	Mode=2;
 	return true;
 }
@@ -466,11 +443,11 @@ Game Staticstics Comparison:
 
 <!-- The Host Selection Bar -->
 <div id="div10" style="position:absolute; left:25px; top:520px; width:700px; height:30px; visibility: hidden; color: #666666; font-size: 14pt; text-align:center; z-index:2;">
-<form name="HostSelect"><table border=0 style="color: #003399; font-size: 14pt; font-weight: bold">
+<form name="HostSelect"><table border=0 style="color: #003399; font-size: 16pt; font-weight: bold">
 	<tr>
 		<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The host is &nbsp;  </td><td><select name="Host" size=1><option value=1 selected>Host 1<option value=2>Host 2<option value=3>Host 3</select></td>
-		<td>&nbsp; &nbsp;</td>
-		<td width=80><input type=button value="Apply" name="Apply" title="Apply the new host you selected" onClick="ChangeHost(this.form.Host.value); return true;"></td>
+		<td></td>
+		<td width=150><input type=button value="!!! Click here to Apply" name="Apply" title="Apply the new host you selected" onClick="ChangeHost(this.form.Host.value); clearTempData(); return true;"></td>
 	</tr>
 </form>
 
