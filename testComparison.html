@@ -44,7 +44,7 @@ function Mclick(pos){
 
 function Mode0Act(pos){
 	Mode=9;
-	document.all["qm"+pos].innerText="!";
+	document.getElementById(["qm"+pos]).innerText="!";
 	PosToShow=(pos=="G1" || (pos=="C" && RandomNumber(2)==0)?"G2":"G1");
 	document.all["photo"+PosToShow].style.visibility='visible';
 	document.all["qm"+PosToShow].style.visibility='hidden';
@@ -58,13 +58,13 @@ function Mode0Act(pos){
 
 function Mode1Act(pos){
 	Mode=9;
-	document.all.qmC.style.visibility='hidden';
+	document.getElementById("qmC").style.visibility='hidden';
 	document.all.qmG1.style.visibility='hidden';
 	document.all.qmG2.style.visibility='hidden';
-	document.all.photoC.style.visibility='visible';
+	document.getElementById("photoC").style.visibility='visible';
 	document.all.photoG1.style.visibility='visible';
 	document.all.photoG2.style.visibility='visible';
-	document.all.Line1.innerHTML=(pos==FirstChoice?"You kept your choice":"You changed your choice")+", "+(pos=="C"?"You win the car !":"You lose");
+	document.getElementById("Line1").innerHTML=(pos==FirstChoice?"You kept your choice":"You changed your choice")+", "+(pos=="C"?"You win the car !":"You lose");
 
 	if(pos==FirstChoice) { // Keep choice
 		GuessesKeep++;

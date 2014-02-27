@@ -16,35 +16,36 @@ Cheating=false;
 
 // ====================================================================================
 function clearTempData(){
-	document.getElementById(["Total"+previousHost.toString()]).innerText=tempTotal;	
-	document.getElementById(["WithKeep"+previousHost.toString()]).innerText=tempWithSwitch;
-	document.getElementById(["NSW"+previousHost.toString()]).innerText=tempNSW;
-	document.getElementById(["NSL"+previousHost.toString()]).innerText=tempNSL;
-	document.getElementById(["WithSwitch"+previousHost.toString()]).innerText=tempWithSwitch;
-	document.getElementById(["SW"+previousHost.toString()]).innerText=tempSW;	
-	document.getElementById(["SL"+previousHost.toString()]).innerText=tempSL;		
+	document.all["Total"+previousHost.toString()].innerText=tempTotal;	
+	document.all["WithKeep"+previousHost.toString()].innerText=tempWithSwitch;
+	document.all["NSW"+previousHost.toString()].innerText=tempNSW;
+	document.all["NSL"+previousHost.toString()].innerText=tempNSL;
+	document.all["WithSwitch"+previousHost.toString()].innerText=tempWithSwitch;
+	document.all["SW"+previousHost.toString()].innerText=tempSW;	
+	document.all["SL"+previousHost.toString()].innerText=tempSL;		
 	tempTotal = tempWithKeep = tempNSW = tempNSL = tempWithSwitch = tempSW = tempSL = 0;
 	return true
 }
 
 function ClearCounters(){
 	GuessesKeep=KeepWin=KeepLose=GuessesChange=ChangeWin=ChangeLose=0;
-	document.getElementById("WithKeep").innerText="0 times"; 
-	document.getElementById("KeepWin").innerText=0;
-	document.getElementById("KeepLose").innerText=0;
-	document.getElementById("WithChange").innerText="0 times";
-	document.getElementById("ChangeWin").innerText=0;
-	document.getElementById("ChangeLose").innerText=0;
-	document.getElementById("Line2").innerText="cars";
-	document.getElementById("Line3").innerText="(0%)";
-	document.getElementById("Line4").innerText="cows";
-	document.getElementById("Line5").innerText="(0%)";
-	document.getElementById("Line6").innerText="cars";
-	document.getElementById("Line7").innerText="(0%)";
-	document.getElementById("Line8").innerText="cows";
-	document.getElementById("Line9").innerText="(0%)";
+	document.all.WithKeep.innerText="0 times"; 
+	document.all.KeepWin.innerText=0;
+	document.all.KeepLose.innerText=0;
+	document.all.WithChange.innerText="0 times";
+	document.all.ChangeWin.innerText=0;
+	document.all.ChangeLose.innerText=0;
+	document.all.Line2.innerText="cars";
+	document.all.Line3.innerText="(0%)";
+	document.all.Line4.innerText="cows";
+	document.all.Line5.innerText="(0%)";
+	document.all.Line6.innerText="cars";
+	document.all.Line7.innerText="(0%)";
+	document.all.Line8.innerText="cows";
+	document.all.Line9.innerText="(0%)";
 	return true;
 }
+
 // --- --- --- --- --- --- --- --- --- ---
 
 function Mclick(pos){
@@ -63,8 +64,8 @@ function ChangeHost(hostNumber){
 function behaveHost1(pos){
 	PosToShow=((pos=="G1" || (pos=="C" && RandomNumber(2)==0))?"G2":"G1");
 	// alert("Here the PosToShow is " + PosToShow);
-	document.getElementById(["qm"+PosToShow]).style.visibility='hidden';
-	document.getElementById(["photo"+PosToShow]).style.visibility='visible';
+	document.all["qm"+PosToShow].style.visibility='hidden';
+	document.all["photo"+PosToShow].style.visibility='visible';
 	FirstChoice=pos;
 	WriteMode1Text();
 	Mode=1;
@@ -81,38 +82,38 @@ function behaveHost2(pos){
 				PosToShow = "G1";
 			}
 				// alert("Here the PosToShow is " + PosToShow);
-				document.getElementById(["qm"+PosToShow]).style.visibility='hidden';
-				document.getElementById(["photo"+PosToShow]).style.visibility='visible';
+				document.all["qm"+PosToShow].style.visibility='hidden';
+				document.all["photo"+PosToShow].style.visibility='visible';
 				FirstChoice=pos;
 				WriteMode1Text();
 				Mode = 1;				
 		}
 		else { // user clicks cow at the first and host 2 shows the door, end of game
 				// Model1Act(pos);
-				document.getElementById("qmC").style.visibility='hidden';
-				document.getElementById("qmG1").style.visibility='hidden';
-				document.getElementById("qmG2").style.visibility='hidden';
-				document.getElementById("photoC").style.visibility='visible';
-				document.getElementById("photoG1").style.visibility='visible';
-				document.getElementById("photoG2").style.visibility='visible';
-				document.getElementById("Line1").innerHTML=("You lose");
+				document.all.qmC.style.visibility='hidden';
+				document.all.qmG1.style.visibility='hidden';
+				document.all.qmG2.style.visibility='hidden';
+				document.all.photoC.style.visibility='visible';
+				document.all.photoG1.style.visibility='visible';
+				document.all.photoG2.style.visibility='visible';
+				document.all.Line1.innerHTML=("You lose");
 
 				GuessesKeep++;
 				tempWithKeep++;
-				document.getElementById("WithKeep").innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
-				document.getElementById(["WithKeep"+host.toString()]).innerText=tempWithKeep;
+				document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
+				document.all["WithKeep"+host.toString()].innerText=tempWithKeep;
 
 				KeepLose++;
 				tempNSL++;
-				document.getElementById("KeepLose").innerText=KeepLose;
-				document.getElementById(["NSL"+host.toString()]).innerText=tempNSL;
+				document.all.KeepLose.innerText=KeepLose;
+				document.all["NSL"+host.toString()].innerText=tempNSL;
 
-				document.getElementById("Line3").innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
-				document.getElementById("Line5").innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
+				document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
+				document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
 				Total = GuessesKeep + GuessesChange;
 				tempTotal = tempWithKeep + tempWithSwitch;
-				document.getElementById(["Total"+host.toString()]).innerText= tempTotal;	
+				document.all["Total"+host.toString()].innerText= tempTotal;	
 				Mode = 2;
 			}
 	return PosToShow;
@@ -123,7 +124,7 @@ function behaveHost2(pos){
 function Mode0Act(pos){
 	posi = pos;
 	Mode=9;
-	document.getElementById(["qm"+pos]).innerText="!";
+	document.all["qm"+pos].innerText="!";
 	
 	if (host == 1){
 		behaveHost1(posi);
@@ -149,114 +150,63 @@ function Mode0Act(pos){
 
 function Mode1Act(pos){
 	Mode=9;
-	document.getElementById("qmC").style.visibility='hidden';
-	document.getElementById("qmG1").style.visibility='hidden';
-	document.getElementById("qmG2").style.visibility='hidden';
-	document.getElementById("photoC").style.visibility='visible';
-	document.getElementById("photoG1").style.visibility='visible';
-	document.getElementById("photoG2").style.visibility='visible';
-	document.getElementById("Line1").innerHTML=(pos==FirstChoice?"You kept your choice":"You changed your choice")+", "+(pos=="C"?"You win the car !":"You lose");
+	document.all.qmC.style.visibility='hidden';
+	document.all.qmG1.style.visibility='hidden';
+	document.all.qmG2.style.visibility='hidden';
+	document.all.photoC.style.visibility='visible';
+	document.all.photoG1.style.visibility='visible';
+	document.all.photoG2.style.visibility='visible';
+	document.all.Line1.innerHTML=(pos==FirstChoice?"You kept your choice":"You changed your choice")+", "+(pos=="C"?"You win the car !":"You lose");
 
 	if(pos==FirstChoice) { // Keep Choice
 		GuessesKeep++;
 		tempWithKeep++;
-		document.getElementById("WithKeep").innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
-		document.getElementById(["WithKeep"+host.toString()]).innerText=tempWithKeep;
+		document.all.WithKeep.innerText=GuessesKeep+(GuessesKeep==1?" time":" times");
+		document.all["WithKeep"+host.toString()].innerText=tempWithKeep;
 		if(pos=="C"){ // Car Not switched and Win Case
 			KeepWin++;
 			tempNSW++;
-			document.getElementById("KeepWin").innerText=KeepWin;
-			document.getElementById(["NSW"+host.toString()]).innerText=tempNSW;
-			if(KeepWin==1){ document.getElementById("Line2").innerText="car"; }
-			if(KeepWin==2){ document.getElementById("Line2").innerText="cars"; }
+			document.all.KeepWin.innerText=KeepWin;
+			document.all["NSW"+host.toString()].innerText=tempNSW;
+			if(KeepWin==1){ document.all.Line2.innerText="car"; }
+			if(KeepWin==2){ document.all.Line2.innerText="cars"; }
 		} else { // cow: Not switched and Lose case
 			KeepLose++;
 			tempNSL++;
-			document.getElementById("KeepLose").innerText=KeepLose;
-			document.getElementById(["NSL"+host.toString()]).innerText=tempNSL;
-			if(KeepLose==1){ document.getElementById("Line4").innerText="cow"; }
-			if(KeepLose==2){ document.getElementById("Line4").innerText="cows"; }
+			document.all.KeepLose.innerText=KeepLose;
+			document.all["NSL"+host.toString()].innerText=tempNSL;
+			if(KeepLose==1){ document.all.Line4.innerText="cow"; }
+			if(KeepLose==2){ document.all.Line4.innerText="cows"; }
 		}
-		document.getElementById("Line3").innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
-		document.getElementById("Line5").innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
+		document.all.Line3.innerText="(" + Math.floor(100*KeepWin/GuessesKeep)+"%)";
+		document.all.Line5.innerText="(" + (100-Math.floor(100*KeepWin/GuessesKeep))+"%)";
 
 	} else { // Switch Choice
 		GuessesChange++;
 		tempWithSwitch++;
-		document.getElementById("WithChange").innerText=GuessesChange+(GuessesChange==1?" time":" times");
-		document.getElementById(["WithSwitch"+host.toString()]).innerText=tempWithSwitch;
+		document.all.WithChange.innerText=GuessesChange+(GuessesChange==1?" time":" times");
+		document.all["WithSwitch"+host.toString()].innerText=tempWithSwitch;
 		if(pos=="C"){ // Car
 			ChangeWin++;
 			tempSW++;
-			document.getElementById("ChangeWin").innerText=ChangeWin;
-			document.getElementById(["SW"+host.toString()]).innerText=tempSW;
-			if(ChangeWin==1){ document.getElementById("Line6").innerText="car"; }
-			if(ChangeWin==2){ document.getElementById("Line6").innerText="cars"; }
+			document.all.ChangeWin.innerText=ChangeWin;
+			document.all["SW"+host.toString()].innerText=tempSW;
+			if(ChangeWin==1){ document.all.Line6.innerText="car"; }
+			if(ChangeWin==2){ document.all.Line6.innerText="cars"; }
 		} else { // cow
 			ChangeLose++;
 			tempSL++;
-			document.getElementById("ChangeLose").innerText=ChangeLose;
-			document.getElementById(["SL"+host.toString()]).innerText=tempSL;
-			if(ChangeLose==1){ document.getElementById("Line8").innerText="cow"; }
-			if(ChangeLose==2){ document.getElementById("Line8").innerText="cows"; }
+			document.all.ChangeLose.innerText=ChangeLose;
+			document.all["SL"+host.toString()].innerText=tempSL;
+			if(ChangeLose==1){ document.all.Line8.innerText="cow"; }
+			if(ChangeLose==2){ document.all.Line8.innerText="cows"; }
 		}
-		document.getElementById("Line7").innerText="(" + Math.floor(100*ChangeWin/GuessesChange)+"%)";
-		document.getElementById("Line9").innerText="(" + (100-Math.floor(100*ChangeWin/GuessesChange))+"%)";
+		document.all.Line7.innerText="(" + Math.floor(100*ChangeWin/GuessesChange)+"%)";
+		document.all.Line9.innerText="(" + (100-Math.floor(100*ChangeWin/GuessesChange))+"%)";
 	}
 	tempTotal = tempWithKeep + tempWithSwitch;
-	document.getElementById(["Total"+host.toString()]).innerText= tempTotal;
+	document.all["Total"+host.toString()].innerText= tempTotal;
 	Mode=2;
-	return true;
-}
-
-// --- --- --- --- --- --- --- --- --- ---
-
-function Mode2Act(){ // Perform moving
-	Mode=9;
-	if(document.getElementById("photoC").style.visibility=="visible"){
-		Cpos=document.getElementById("photoC").style.pixelLeft;
-		G1pos=document.getElementById("photoG1").style.pixelLeft;
-		G2pos=document.getElementById("photoG2").style.pixelLeft;
-		if(Cpos<250){ document.getElementById("photoC").style.pixelLeft=Cpos+5; }
-		if(Cpos>250){ document.getElementById("photoC").style.pixelLeft=Cpos-5; }
-		if(G1pos<250){ document.getElementById("photoG1").style.pixelLeft=G1pos+5; }
-		if(G1pos>250){ document.getElementById("photoG1").style.pixelLeft=G1pos-5; }
-		if(G2pos<250){ document.getElementById("photoG2").style.pixelLeft=G2pos+5; }
-		if(G2pos>250){ document.getElementById("photoG2").style.pixelLeft=G2pos-5; }
-		if(G1pos==G2pos){ // Has reached mid pos
-			document.getElementById("qmC").style.pixelLeft=250;
-			document.getElementById("qmG1").style.pixelLeft=250;
-			document.getElementById("qmG2").style.pixelLeft=250;
-			document.getElementById("qmC").innerText="?";
-			document.getElementById("qmG1").innerText="?";
-			document.getElementById("qmG2").innerText="?";
-			document.getElementById("qmC").style.visibility='visible';
-			document.getElementById("qmG1").style.visibility='visible';
-			document.getElementById("qmG2").style.visibility='visible';
-			document.getElementById("photoC").style.visibility='hidden';
-			document.getElementById("photoG1").style.visibility='hidden';
-			document.getElementById("photoG2").style.visibility='hidden';
-			document.getElementById("qmC").style.color='#000000';
-			document.getElementById("qmG1").style.color='#000000';
-			document.getElementById("qmG2").style.color='#000000';
-			document.getElementById("Line1").innerText="";
-			setTimeout('Mode2Act();', 222);
-		} else {
-			setTimeout('Mode2Act();', 1);
-		}
-	} else {
-		G1pos=document.getElementById("qmG1").style.pixelLeft-5;
-		document.getElementById("qmG1").style.pixelLeft=G1pos;
-		document.getElementById("qmG2").style.pixelLeft=document.getElementById("qmG2").style.pixelLeft+5;
-		if(G1pos>25){
-			setTimeout('Mode2Act();', 1);
-		} else {
-			document.getElementById("qmC").style.color='#ffffff';
-			document.getElementById("qmG1").style.color='#ffffff';
-			document.getElementById("qmG2").style.color='#ffffff';
-			setTimeout('PrepareNewRound();', 2);
-		}
-	}
 	return true;
 }
 
@@ -265,16 +215,17 @@ function Mode2Act(){ // Perform moving
 function PrepareNewRound(){
 	// alert("at least it is called here");
 	ScramblePositions();
-	document.getElementById("qmC").innerText="?";
-	document.getElementById("qmG1").innerText="?";
-	document.getElementById("qmG2").innerText="?";
-	document.getElementById("qmC").style.visibility='visible';
-	document.getElementById("photoC").style.visibility='hidden';
-	document.getElementById("qmG1").style.visibility='visible';
-	document.getElementById("photoG1").style.visibility='hidden';
-	document.getElementById("qmG2").style.visibility='visible';
-	document.getElementById("photoG2").style.visibility='hidden';
-	document.getElementById("Line1").innerHTML="Select one of the three boxes above";
+	// alert("at least it is called here");
+	document.all.qmC.innerText="?";
+	document.all.qmG1.innerText="?";
+	document.all.qmG2.innerText="?";
+	document.all.qmC.style.visibility='visible';
+	document.all.photoC.style.visibility='hidden';
+	document.all.qmG1.style.visibility='visible';
+	document.all.photoG1.style.visibility='hidden';
+	document.all.qmG2.style.visibility='visible';
+	document.all.photoG2.style.visibility='hidden';
+	document.all.Line1.innerHTML="Select one of the three boxes above";
 	Mode=0;
 	if(Cheating){SelectCheating();}
 	return true;
@@ -296,9 +247,16 @@ function RandomNumber(SpanWidth){ // This function returns a random number
 }
 
 // --- --- --- --- --- --- --- --- --- ---
+// Alternative RandomNumber function, improved probability funtion
 
 // function RandomNumber(SpanWidth){ // This function returns a random number
-// 	ReturnValue = Math.floor((Math.random()*SpanWidth)+1)
+
+// 	if(TheRandom<=SpanWidth){
+// 		Now=new Date();
+// 		TheRandom=SpanWidth+Math.floor(Math.pow(Math.floor(Now.getTime())%131071, Math.PI));
+// 	}
+// 	ReturnValue=TheRandom%SpanWidth;
+// 	TheRandom=Math.ceil(TheRandom/SpanWidth);
 // 	alert("the return value is " +  ReturnValue)
 // 	return ReturnValue;
 	
@@ -342,9 +300,35 @@ function RunButton(CyclesToRun,HowToChoose){
 	return true;
 }
 
+// // --- --- --- --- --- --- --- --- --- ---
+
+// function ScramblePositions(){
+// 	CarPos=RandomNumber(3); // get random number, the one for car here
+// 	// alert("in self test, the RandomNumber(3) returns " + CarPos)
+// 	if(RandomNumber(2)==0){
+// 		cow1Pos=CarPos+1; cow2Pos=CarPos+2;
+// 	} else {
+// 		cow1Pos=CarPos+2; cow2Pos=CarPos+1;
+// 	}
+// 	if(cow1Pos>2){cow1Pos-=3;}
+// 	if(cow2Pos>2){cow2Pos-=3;}
+// 	document.all.qmC.style.pixelLeft=25+225*CarPos;
+// 	document.all.photoC.style.pixelLeft=25+225*CarPos;
+// 	document.all.qmG1.style.pixelLeft=25+225*cow1Pos;
+// 	document.all.photoG1.style.pixelLeft=25+225*cow1Pos;
+// 	document.all.qmG2.style.pixelLeft=25+225*cow2Pos;
+// 	document.all.photoG2.style.pixelLeft=25+225*cow2Pos;
+// 	document.all.photoC.style.zIndex=(CarPos==1?4:3);
+// 	document.all.photoG1.style.zIndex=(cow1Pos==1?4:3);
+// 	document.all.photoG2.style.zIndex=(cow2Pos==1?4:3);
+// 	return true;
+// }
+
+
 // --- --- --- --- --- --- --- --- --- ---
 
 function ScramblePositions(){
+	RandomNum = 
 	CarPos=RandomNumber(3); // get random number, the one for car here
 	// alert("in self test, the RandomNumber(3) returns " + CarPos)
 	if(RandomNumber(2)==0){
@@ -354,82 +338,94 @@ function ScramblePositions(){
 	}
 	if(cow1Pos>2){cow1Pos-=3;}
 	if(cow2Pos>2){cow2Pos-=3;}
-	document.getElementById("qmC").style.pixelLeft=25+225*CarPos;
-	document.getElementById("photoC").style.pixelLeft=25+225*CarPos;
-	document.getElementById("qmG1").style.pixelLeft=25+225*cow1Pos;
-	document.getElementById("photoG1").style.pixelLeft=25+225*cow1Pos;
-	document.getElementById("qmG2").style.pixelLeft=25+225*cow2Pos;
-	document.getElementById("photoG2").style.pixelLeft=25+225*cow2Pos;
+	document.getElementById("qmC").style.left=25+225*CarPos;
+	document.getElementById("photoC").style.left=25+225*CarPos;
+	document.getElementById("qmG1").style.left=25+225*cow1Pos;
+	document.getElementById("photoG1").style.left=25+225*cow1Pos;
+	document.getElementById("qmG2").style.left=25+225*cow2Pos;
+	document.getElementById("photoG2").style.left=25+225*cow2Pos;
 	document.getElementById("photoC").style.zIndex=(CarPos==1?4:3);
 	document.getElementById("photoG1").style.zIndex=(cow1Pos==1?4:3);
 	document.getElementById("photoG2").style.zIndex=(cow2Pos==1?4:3);
 	return true;
 }
 
+
 // --- --- --- --- --- --- --- --- --- ---
-// The new fix of Mode2Act
+
+function Mode2Act(){ // Perform moving
+	Mode=9;
+	if(document.all.photoC.style.visibility=="visible"){
+		PrepareNewRound();
+	}
+	return true;
+}
+
+
+
+
+
+
+// --- --- --- --- --- --- --- --- --- ---
 
 // function Mode2Act(){ // Perform moving
 // 	Mode=9;
-// 	if(document.getElementById.photoC.style.visibility=="visible"){
-
-
-
-
-// 		Cpos=document.getElementById.photoC.style.pixelLeft;
-// 		G1pos=document.getElementById.photoG1.style.pixelLeft;
-// 		G2pos=document.getElementById.photoG2.style.pixelLeft;
-// 		if(Cpos<250){ document.getElementById.photoC.style.pixelLeft=Cpos+5; }
-// 		if(Cpos>250){ document.getElementById.photoC.style.pixelLeft=Cpos-5; }
-// 		if(G1pos<250){ document.getElementById.photoG1.style.pixelLeft=G1pos+5; }
-// 		if(G1pos>250){ document.getElementById.photoG1.style.pixelLeft=G1pos-5; }
-// 		if(G2pos<250){ document.getElementById.photoG2.style.pixelLeft=G2pos+5; }
-// 		if(G2pos>250){ document.getElementById.photoG2.style.pixelLeft=G2pos-5; }
+// 	if(document.all.photoC.style.visibility=="visible"){
+// 		Cpos=document.all.photoC.style.pixelLeft;
+// 		G1pos=document.all.photoG1.style.pixelLeft;
+// 		G2pos=document.all.photoG2.style.pixelLeft;
+// 		if(Cpos<250){ document.all.photoC.style.pixelLeft=Cpos+5; }
+// 		if(Cpos>250){ document.all.photoC.style.pixelLeft=Cpos-5; }
+// 		if(G1pos<250){ document.all.photoG1.style.pixelLeft=G1pos+5; }
+// 		if(G1pos>250){ document.all.photoG1.style.pixelLeft=G1pos-5; }
+// 		if(G2pos<250){ document.all.photoG2.style.pixelLeft=G2pos+5; }
+// 		if(G2pos>250){ document.all.photoG2.style.pixelLeft=G2pos-5; }
 // 		if(G1pos==G2pos){ // Has reached mid pos
-// 			document.getElementById.qmC.style.pixelLeft=250;
-// 			document.getElementById.qmG1.style.pixelLeft=250;
-// 			document.getElementById.qmG2.style.pixelLeft=250;
-// 			document.getElementById.qmC.innerText="?";
-// 			document.getElementById.qmG1.innerText="?";
-// 			document.getElementById.qmG2.innerText="?";
-// 			document.getElementById.qmC.style.visibility='visible';
-// 			document.getElementById.qmG1.style.visibility='visible';
-// 			document.getElementById.qmG2.style.visibility='visible';
-// 			document.getElementById.photoC.style.visibility='hidden';
-// 			document.getElementById.photoG1.style.visibility='hidden';
-// 			document.getElementById.photoG2.style.visibility='hidden';
-// 			document.getElementById.qmC.style.color='#000000';
-// 			document.getElementById.qmG1.style.color='#000000';
-// 			document.getElementById.qmG2.style.color='#000000';
-// 			document.getElementById.Line1.innerText="";
+// 			document.all.qmC.style.pixelLeft=250;
+// 			document.all.qmG1.style.pixelLeft=250;
+// 			document.all.qmG2.style.pixelLeft=250;
+// 			document.all.qmC.innerText="?";
+// 			document.all.qmG1.innerText="?";
+// 			document.all.qmG2.innerText="?";
+// 			document.all.qmC.style.visibility='visible';
+// 			document.all.qmG1.style.visibility='visible';
+// 			document.all.qmG2.style.visibility='visible';
+// 			document.all.photoC.style.visibility='hidden';
+// 			document.all.photoG1.style.visibility='hidden';
+// 			document.all.photoG2.style.visibility='hidden';
+// 			document.all.qmC.style.color='#000000';
+// 			document.all.qmG1.style.color='#000000';
+// 			document.all.qmG2.style.color='#000000';
+// 			document.all.Line1.innerText="";
 // 			setTimeout('Mode2Act();', 222);
 // 		} else {
 // 			setTimeout('Mode2Act();', 1);
 // 		}
 // 	} else {
-// 		G1pos=document.getElementById.qmG1.style.pixelLeft-5;
-// 		document.getElementById.qmG1.style.pixelLeft=G1pos;
-// 		document.getElementById.qmG2.style.pixelLeft=document.getElementById.qmG2.style.pixelLeft+5;
+// 		G1pos=document.all.qmG1.style.pixelLeft-5;
+// 		document.all.qmG1.style.pixelLeft=G1pos;
+// 		document.all.qmG2.style.pixelLeft=document.all.qmG2.style.pixelLeft+5;
 // 		if(G1pos>25){
 // 			setTimeout('Mode2Act();', 1);
 // 		} else {
-// 			document.getElementById.qmC.style.color='#ffffff';
-// 			document.getElementById.qmG1.style.color='#ffffff';
-// 			document.getElementById.qmG2.style.color='#ffffff';
+// 			document.all.qmC.style.color='#ffffff';
+// 			document.all.qmG1.style.color='#ffffff';
+// 			document.all.qmG2.style.color='#ffffff';
 // 			setTimeout('PrepareNewRound();', 2);
 // 		}
 // 	}
 // 	return true;
 // }
 
+
 // --- --- --- --- --- --- --- --- --- ---
 
 function SelectCheating(){
-	document.getElementById("qmC").innerText=Cheating?"CA":"?";
-	document.getElementById("qmG1").innerText=Cheating?"CO":"?";
-	document.getElementById("qmG2").innerText=Cheating?"CO":"?";
+	document.all.qmC.innerText=Cheating?"CA":"?";
+	document.all.qmG1.innerText=Cheating?"CO":"?";
+	document.all.qmG2.innerText=Cheating?"CO":"?";
 	if(Mode>0){
-		document.getElementById(["qm"+FirstChoice]).innerText="!";
+		document.all["qm"+FirstChoice].innerText="!";
 		if(Mode==1){ WriteMode1Text(); }
 	}
 	return true;
@@ -438,7 +434,7 @@ function SelectCheating(){
 // --- --- --- --- --- --- --- --- --- ---
 
 function WriteMode1Text(){
-	document.getElementById("Line1").innerHTML="Click '!' to keep your first choice or '" + (Cheating?(FirstChoice=="C"?"G":"C"):"?") + "' to switch it";
+	document.all.Line1.innerHTML="Click '!' to keep your first choice or '" + (Cheating?(FirstChoice=="C"?"G":"C"):"?") + "' to switch it";
 	return true;
 }
 
@@ -453,8 +449,9 @@ body, table, select, input {font-family:Arial, Helvetica, sans-serif; color: #00
 </style>
 </head>
 
-<body bgcolor="#dcf0f7" onLoad="PrepareNewRound(); document.getElementById("div8").style.visibility='visible'; document.getElementById("div10").style.visibility='visible'; document.getElementById("div9").style.visibility='visible'; document.getElementById("div11").style.visibility='visible'; return true;">
+<body bgcolor="#dcf0f7" onLoad="PrepareNewRound(); document.all.div8.style.visibility='visible'; document.all.div10.style.visibility='visible'; document.all.div9.style.visibility='visible'; document.all.div11.style.visibility='visible'; return true;">
 <noscript><h1>Sorry, this program require Javascript, it will not work for you</h1></noscript>
+
 <div id="qmC" style="position:absolute; left:25px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('C'); return true;">?</div>
 <div id="qmG1" style="position:absolute; left:250px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('G1'); return true;">?</div>
 <div id="qmG2" style="position:absolute; left:475px; top:25px; width:200px; height:200px; visibility: hidden; font-weight: bold; color: #ffffff; background-color:#666666; font-size: 120pt; text-align:center;" onMouseOver="this.style.color='#000000'; return true;" onMouseOut="this.style.color='#ffffff'; return true;" onClick="Mclick('G2'); return true;">?</div>
@@ -519,7 +516,7 @@ Game Staticstics Comparison:
 
 <td><input type=button value="Clear result" title="Clear the counters above" onClick="return ClearCounters();"> &nbsp; &nbsp; &nbsp; </td>
 
-<td><input type=button value="Help" onClick="document.getElementById("div10").style.visibility='hidden'; document.getElementById("helptext").style.visibility='visible'; return true;"></td></tr>
+<td><input type=button value="Help" onClick="document.all.div10.style.visibility='hidden'; document.all.helptext.style.visibility='visible'; return true;"></td></tr>
 
 </table></form></div>
 
@@ -533,7 +530,7 @@ Game Staticstics Comparison:
 
 <table width=555 align=center style="font-size: 100%;"><tr><td><br>
 
-This is a Monty Hall Problem Simulator. Click on one of the 3 doors. If not getElementById doors open, you are being offered a switch; click again on the same door or switch to the other closed door. After getElementById door are opened, the simulator will automatically run a next round. If you want to clear the result, click clear button. Each of the 3 hosts has a different strategy for offering switch<br><br>
+This is a Monty Hall Problem Simulator. Click on one of the 3 doors. If not all doors open, you are being offered a switch; click again on the same door or switch to the other closed door. After all door are opened, the simulator will automatically run a next round. If you want to clear the result, click clear button. Each of the 3 hosts has a different strategy for offering switch<br><br>
 
 You can let the computer run 10, 100 or 1000 runs after each other. Select the number of runs and if choice shall be kept or changed each time and start with the Start button. The simulator will randomly select a box and keep/change the choice after your wish. You can stop the run with the stop-button. <br><br>
 
@@ -542,7 +539,7 @@ By checking Cheat the boxes will be marked with CA and CO to show where the car 
 </td></tr></table>
 
 <center>
-<form name="CloseHelp"><input type=button value=" Ok " onClick="			document.getElementById("helptext").style.visibility='hidden'; document.getElementById("div10").style.visibility='visible';return true;"></form></center>
+<form name="CloseHelp"><input type=button value=" Ok " onClick="			document.all.helptext.style.visibility='hidden'; document.all.div10.style.visibility='visible';return true;"></form></center>
 </div>
 
 </body>
